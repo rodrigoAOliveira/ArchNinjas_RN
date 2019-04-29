@@ -13,6 +13,7 @@ const mainNavigator = createStackNavigator(
 
 const AppContainer = createAppContainer(mainNavigator);
 
+console.disableYellowBox = true;
 export default class App extends Component {
   render() {
     return <AppContainer/>
