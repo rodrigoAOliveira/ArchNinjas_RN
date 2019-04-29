@@ -1,6 +1,4 @@
-import Realm from 'realm'
 import {Observable} from "rxjs";
-import {fromPromise} from "rxjs/internal-compatibility";
 
 export default class DbClient {
   static _instance: DbClient;
@@ -19,23 +17,14 @@ export default class DbClient {
   _dbConfig: any;
 
   openDb(): Observable {
-    return fromPromise(Realm.open(this._dbConfig));
+    return Observable.of('Todo')
   }
 
   save(table: string, object: any): Observable {
-    return this.openDb()
-      .flatMap(realm => {
-        //Todo: save into realm
-
-        return Observable.next()
-      })
+    return Observable.of('Todo')
   }
 
   get(table: string, id: string): Observable {
-    return this.openDb()
-      .flatMap(realm => {
-        //Todo: get from realm
-        return Observable.next(/*Pass here the fetched object*/)
-      })
+    return Observable.of('Todo')
   }
 }

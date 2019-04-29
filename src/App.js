@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import {createAppContainer, createStackNavigator} from 'react-navigation';
+import ProfilePage from "./views/pages/Profile/view";
 
 const mainNavigator = createStackNavigator(
   {
-    //Todo: Setup app screens
+    Profile: ProfilePage
+  },
+  {
+    headerMode: "none",
   }
 );
 

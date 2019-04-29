@@ -44,6 +44,12 @@
 		E210D388079F431B9DEBBFEA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B214D71A46294004BDE2B719 /* libz.tbd */; };
 		B7EFEA44789F4C719A43EBA2 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE24545FC1944F78DCADE88 /* libRNGestureHandler.a */; };
 		DB3D46A031F4459B86E776F1 /* libRNGestureHandler-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD54ED07DCA04732A75DC6F6 /* libRNGestureHandler-tvOS.a */; };
+		C818EE1F0553421896A23E28 /* font-ninjas.TTF in Resources */ = {isa = PBXBuildFile; fileRef = CDD0EB009B374D1C970886B8 /* font-ninjas.TTF */; };
+		457EDAAC3B054A7E84A0D5FF /* Kato.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFA9C8170BEF437094708216 /* Kato.ttf */; };
+		38C8E96F967C4CD992C5DAEE /* Ninjas.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 607DEB3E5A6740C9B24303DA /* Ninjas.TTF */; };
+		85E189FD2EC54ADFB8BAA01C /* Ninjas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B19A877102B43BC9D89B069 /* Ninjas.ttf */; };
+		406A4A46113E41CCAC651B27 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03185E0A011C4E6B9182E9CF /* libRNSVG.a */; };
+		A0A44B27E48C4AB1945F975D /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E7CC1987A07424AADB7F16F /* libRNSVG-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -358,6 +364,13 @@
 		16342BA4C4FB414AB4B6D037 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; name = "RNGestureHandler.xcodeproj"; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		5FE24545FC1944F78DCADE88 /* libRNGestureHandler.a */ = {isa = PBXFileReference; name = "libRNGestureHandler.a"; path = "libRNGestureHandler.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		CD54ED07DCA04732A75DC6F6 /* libRNGestureHandler-tvOS.a */ = {isa = PBXFileReference; name = "libRNGestureHandler-tvOS.a"; path = "libRNGestureHandler-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		CDD0EB009B374D1C970886B8 /* font-ninjas.TTF */ = {isa = PBXFileReference; name = "font-ninjas.TTF"; path = "../src/views/assets/fonts/font-ninjas.TTF"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DFA9C8170BEF437094708216 /* Kato.ttf */ = {isa = PBXFileReference; name = "Kato.ttf"; path = "../src/views/assets/fonts/Kato.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		607DEB3E5A6740C9B24303DA /* Ninjas.TTF */ = {isa = PBXFileReference; name = "Ninjas.TTF"; path = "../src/views/assets/fonts/Ninjas.TTF"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8B19A877102B43BC9D89B069 /* Ninjas.ttf */ = {isa = PBXFileReference; name = "Ninjas.ttf"; path = "../src/views/assets/fonts/Ninjas.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		225BBF2130F140AFB2347DD0 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; name = "RNSVG.xcodeproj"; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		03185E0A011C4E6B9182E9CF /* libRNSVG.a */ = {isa = PBXFileReference; name = "libRNSVG.a"; path = "libRNSVG.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		0E7CC1987A07424AADB7F16F /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; name = "libRNSVG-tvOS.a"; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -390,6 +403,7 @@
 				AC2861B523D1468EB46B29E0 /* libc++.tbd in Frameworks */,
 				E210D388079F431B9DEBBFEA /* libz.tbd in Frameworks */,
 				B7EFEA44789F4C719A43EBA2 /* libRNGestureHandler.a in Frameworks */,
+				406A4A46113E41CCAC651B27 /* libRNSVG.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +421,7 @@
 				2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */,
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
 				DB3D46A031F4459B86E776F1 /* libRNGestureHandler-tvOS.a in Frameworks */,
+				A0A44B27E48C4AB1945F975D /* libRNSVG-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +599,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				4E4705B28A214E088CC2FB34 /* RealmReact.xcodeproj */,
 				16342BA4C4FB414AB4B6D037 /* RNGestureHandler.xcodeproj */,
+				225BBF2130F140AFB2347DD0 /* RNSVG.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -605,6 +621,7 @@
 				00E356EF1AD99517003FC87E /* ArchNinjas_RNTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				C864688997F441CBA64BBA35 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -630,6 +647,18 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		C864688997F441CBA64BBA35 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				CDD0EB009B374D1C970886B8 /* font-ninjas.TTF */,
+				DFA9C8170BEF437094708216 /* Kato.ttf */,
+				607DEB3E5A6740C9B24303DA /* Ninjas.TTF */,
+				8B19A877102B43BC9D89B069 /* Ninjas.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1077,6 +1106,10 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				C818EE1F0553421896A23E28 /* font-ninjas.TTF in Resources */,
+				457EDAAC3B054A7E84A0D5FF /* Kato.ttf in Resources */,
+				38C8E96F967C4CD992C5DAEE /* Ninjas.TTF in Resources */,
+				85E189FD2EC54ADFB8BAA01C /* Ninjas.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1214,11 +1247,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/realm/src/**",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Debug;
@@ -1243,11 +1279,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/realm/src/**",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Release;
@@ -1272,6 +1311,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/realm/src/**",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Debug;
@@ -1295,6 +1335,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/realm/src/**",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Release;
@@ -1327,11 +1368,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/realm/src/**",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Debug;
@@ -1364,11 +1408,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/realm/src/**",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Release;
@@ -1400,11 +1447,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/realm/src/**",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Debug;
@@ -1436,11 +1486,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/realm/src/**",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Release;
