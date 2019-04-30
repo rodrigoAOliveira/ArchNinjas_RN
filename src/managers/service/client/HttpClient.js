@@ -1,7 +1,7 @@
 import {BuildConfig} from "../../../BuildConfig";
 import Axios, {AxiosInstance} from "axios";
 import {Observable} from "rxjs";
-import {fromPromise} from "rxjs/internal-compatibility";
+import {fromPromise} from "rxjs-compat/observable/fromPromise";
 
 export default class HttpClient {
   static _instance: HttpClient;
@@ -24,6 +24,12 @@ export default class HttpClient {
   post(url: string, body: any, headers: any): Observable {
     const fullUrl = this._baseUrl + url;
     const options = headers ? {headers} : undefined;
+    console.tron.display({
+      name: 'POST',
+      preview: url,
+      value: [fullUrl, body || 'No Body', headers || 'No Headers'],
+      important: true
+    });
 
     return fromPromise(this._client.post(fullUrl, body, options));
   }
@@ -31,6 +37,12 @@ export default class HttpClient {
   put(url: string, body: any, headers: any): Observable {
     const fullUrl = this._baseUrl + url;
     const options = headers ? {headers} : undefined;
+    console.tron.display({
+      name: 'PUT',
+      preview: url,
+      value: [fullUrl, body || 'No Body', headers || 'No Headers'],
+      important: true
+    });
 
     return fromPromise(this._client.put(fullUrl, body, options));
   }
@@ -38,13 +50,26 @@ export default class HttpClient {
   get(url: string, headers: any): Observable {
     const fullUrl = this._baseUrl + url;
     const options = headers ? {headers} : undefined;
+    console.tron.display({
+      name: 'GET',
+      preview: url,
+      value: [fullUrl, headers || 'No Headers'],
+      important: true
+    });
 
-    return fromPromise(this._client.get(fullUrl, options));
+    return fromPromise(this._client.get(fullUrl, options))
+      .flatMap(response => Observable.of(response.data));
   }
 
   delete(url: string, headers: any): Observable {
     const fullUrl = this._baseUrl + url;
     const options = headers ? {headers} : undefined;
+    console.tron.display({
+      name: 'DELETE',
+      preview: url,
+      value: [fullUrl, headers || 'No Headers'],
+      important: true
+    });
 
     return fromPromise(this._client.delete(fullUrl, options));
   }

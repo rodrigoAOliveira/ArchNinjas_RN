@@ -14,7 +14,6 @@ export const HelloText = styled.Text`
   color: ${Colors.primary};
   fontSize: 44;
   fontFamily: Kato;
-  marginBottom: 300;
 `;
 
 export const HomeIcon = styled(Icon)`

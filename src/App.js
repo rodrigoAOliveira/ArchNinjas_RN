@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {createAppContainer, createStackNavigator} from 'react-navigation';
-import ProfilePage from "./views/pages/Profile/view";
+import NinjaPage from "./views/pages/Ninja/view";
+import {BuildConfig} from "./BuildConfig";
 
 const mainNavigator = createStackNavigator(
   {
-    Profile: ProfilePage
+    Profile: NinjaPage
   },
   {
     headerMode: "none",
@@ -12,8 +13,7 @@ const mainNavigator = createStackNavigator(
 );
 
 const AppContainer = createAppContainer(mainNavigator);
-
-console.disableYellowBox = true;
+BuildConfig.boot();
 export default class App extends Component {
   render() {
     return <AppContainer/>
