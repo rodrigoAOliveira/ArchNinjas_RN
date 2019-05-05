@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
-import {TouchableOpacity, Text} from 'react-native'
+import {Text, TouchableOpacity} from 'react-native'
 import {Center, HelloText, HomeIcon} from "../../assets/styles/styles";
 import Colors from "../../assets/styles/colors";
 import NinjaControler from "./controller";
 import {NinjaList} from './styles'
+import {finalize} from "rxjs/operators";
+import Container from "../../components/Container/view";
 
 export default class NinjaPage extends Component {
   _controller = new NinjaControler();
@@ -16,7 +18,7 @@ export default class NinjaPage extends Component {
     this._showLoading();
     this._controller
       .getNinjas()
-      .finally(this._hideLoading.bind(this))
+      .pipe(finalize(this._hideLoading.bind(this)))
       .subscribe(ninjas => this.setState({
         ...this.state,
         ninjas
@@ -37,7 +39,7 @@ export default class NinjaPage extends Component {
     })
   }
 
-  _renderNinja({ item }) {
+  _renderNinja({item}) {
     return (<Text> {item.name} </Text>)
   }
 
@@ -50,10 +52,12 @@ export default class NinjaPage extends Component {
       </TouchableOpacity>
       <HelloText> Hello Ninjas </HelloText>
 
-      <NinjaList
-        data={ninjas}
-        renderItem={this._renderNinja.bind(this)}
-      />
+      <Container style={{maxHeight: 300}}  hide={ninjas.length === 0}>
+        <NinjaList
+          data={ninjas}
+          renderItem={this._renderNinja.bind(this)}
+        />
+      </Container>
     </Center>;
   }
 }

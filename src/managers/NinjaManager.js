@@ -1,7 +1,8 @@
 import NinjaRepository from "./repo/NinjaRepository";
 import NinjaService from "./service/NinjaService";
-import {Observable} from "rxjs-compat";
+import {Observable} from "rxjs";
 import Ninja from "./repo/models/ninja";
+import {catchError} from "rxjs/operators";
 
 export default class NinjaManager {
   _repo: NinjaRepository;
@@ -15,8 +16,8 @@ export default class NinjaManager {
   getNinjas(): Observable<Ninja[]> {
     return this._service
       .getNinjas()
-      .catch((ignored) => {
+      .pipe(catchError((ignored) =>
         this._repo.getNinjas()
-      });
+      ))
   }
 }

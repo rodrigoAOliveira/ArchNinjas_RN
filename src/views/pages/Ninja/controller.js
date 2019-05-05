@@ -1,5 +1,6 @@
 import NinjaManager from "../../../managers/NinjaManager";
-import {Observable} from "rxjs-compat";
+import {Observable} from "rxjs";
+import { map } from "rxjs/operators"
 import Ninja from "../../../managers/repo/models/ninja";
 
 export default class NinjaControler {
@@ -7,8 +8,8 @@ export default class NinjaControler {
 
   getNinjas(): Observable<Ninja[]> {
     return this._ninjaManager.getNinjas()
-      .flatMap((ninjas) => {
-        return Observable.of(ninjas.filter(ninja => !ninja.outsorcing));
-      });
+      .pipe(
+        map(ninjas => ninjas.filter(ninja => !ninja.outsorcing)),
+      )
   }
 }

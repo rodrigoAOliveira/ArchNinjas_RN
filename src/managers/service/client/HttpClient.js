@@ -1,7 +1,8 @@
 import {BuildConfig} from "../../../BuildConfig";
 import Axios, {AxiosInstance} from "axios";
 import {Observable} from "rxjs";
-import {fromPromise} from "rxjs-compat/observable/fromPromise";
+import {fromPromise} from "rxjs/internal-compatibility";
+import {map} from 'rxjs/operators'
 
 export default class HttpClient {
   static _instance: HttpClient;
@@ -31,7 +32,10 @@ export default class HttpClient {
       important: true
     });
 
-    return fromPromise(this._client.post(fullUrl, body, options));
+    return fromPromise(this._client.post(fullUrl, body, options))
+      .pipe(
+        map(value => HttpClient.mapResponseToProps(value))
+      );
   }
 
   put(url: string, body: any, headers: any): Observable {
@@ -44,7 +48,10 @@ export default class HttpClient {
       important: true
     });
 
-    return fromPromise(this._client.put(fullUrl, body, options));
+    return fromPromise(this._client.put(fullUrl, body, options))
+      .pipe(
+        map(value => HttpClient.mapResponseToProps(value))
+      );
   }
 
   get(url: string, headers: any): Observable {
@@ -58,7 +65,9 @@ export default class HttpClient {
     });
 
     return fromPromise(this._client.get(fullUrl, options))
-      .flatMap(response => Observable.of(response.data));
+      .pipe(
+        map(value => HttpClient.mapResponseToProps(value))
+      );
   }
 
   delete(url: string, headers: any): Observable {
@@ -71,7 +80,14 @@ export default class HttpClient {
       important: true
     });
 
-    return fromPromise(this._client.delete(fullUrl, options));
+    return fromPromise(this._client.delete(fullUrl, options))
+      .pipe(
+        map(value => HttpClient.mapResponseToProps(value))
+      );
+  }
+
+  static mapResponseToProps(response) {
+    return response.data;
   }
 
   //Todo: Add custom interceptors to each individual client
