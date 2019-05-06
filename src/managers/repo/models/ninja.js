@@ -1,4 +1,4 @@
-import {types} from "../orm/DbClient";
+import types from './types'
 
 export default class Ninja {
   static TABLE = 'Ninjas';

@@ -3,26 +3,20 @@ import SQLite from 'react-native-sqlite-storage'
 import {BuildConfig} from "../../../BuildConfig";
 import Ninja from '../models/ninja'
 
-export const types = {
-  INT: 'INTEGER',
-  REAL: 'REAL',
-  STRING: 'TEXT',
-  BLOB: 'BLOB'
-};
-
 export default class DbClient {
   static _instance: DbClient;
 
   constructor(dbConfig) {
     this._dbConfig = dbConfig;
-    this._dbConfig = DbClient.openDb(dbConfig.dbName)
+    this._client = DbClient.openDb(dbConfig.dbName)
   }
 
   static boot() {
     const tables = [{name: Ninja.TABLE, schema: Ninja.schema}];
     const getSQLAttrsFromSchema = (schema) => {
       let result = '';
-      for (let field of schema) {
+      for (let index = 0; index < schema.length; index++) {
+        const field = schema[index];
         result += `${field.attr} ${field.type}`;
 
         if (field.primaryKey) {
@@ -33,6 +27,9 @@ export default class DbClient {
         }
         if (field.notNull) {
           result += ' NOT NULL';
+        }
+        if (index !== schema.length - 1) {
+          result += ',';
         }
       }
       return result;
@@ -45,8 +42,7 @@ export default class DbClient {
       console.tron.log('Executing SQL...', sql);
       dbClient._client.executeSql(sql,
         [],
-        () => {
-        },
+        () => console.tron.log(`Table ${table.name} created successfully`),
         (error) => console.tron.log(`Table ${table.name} failed to create`,
           error));
     })
