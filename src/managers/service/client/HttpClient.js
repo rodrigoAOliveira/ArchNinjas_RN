@@ -19,6 +19,10 @@ export default class HttpClient {
     return HttpClient._instance;
   }
 
+  static mapResponseToProps(response) {
+    return response.data;
+  }
+
   _client: AxiosInstance;
   _baseUrl: string;
 
@@ -85,10 +89,4 @@ export default class HttpClient {
         map(value => HttpClient.mapResponseToProps(value))
       );
   }
-
-  static mapResponseToProps(response) {
-    return response.data;
-  }
-
-  //Todo: Add custom interceptors to each individual client
 }

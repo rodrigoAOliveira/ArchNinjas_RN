@@ -1,5 +1,6 @@
 import Reactotron from 'reactotron-react-native'
 import {name as appName} from '../app.json';
+import DbClient from "./managers/repo/orm/DbClient";
 
 export class BuildConfig {
   static getAppUrl() {
@@ -12,6 +13,7 @@ export class BuildConfig {
   static boot() {
     this._disableYellowBox();
     this._linkReactotron();
+    DbClient.boot();
   }
 
   static _linkReactotron() {
@@ -28,4 +30,8 @@ export class BuildConfig {
   static _disableYellowBox() {
     console.disableYellowBox = true;
   }
+
+  static getAppName() {
+    return appName;
+  };
 }

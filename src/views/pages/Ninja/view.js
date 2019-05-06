@@ -25,6 +25,15 @@ export default class NinjaPage extends Component {
       }));
   }
 
+  _saveNinjas() {
+    const {ninjas} = this.state;
+
+    this._controller
+      .saveNinjas(ninjas)
+      .subscribe(() => console.tron.log('Success inserting ninjas'),
+        error => console.tron.log('Fail inserting ninjas', error));
+  }
+
   _showLoading() {
     this.setState({
       ...this.state,
@@ -52,11 +61,14 @@ export default class NinjaPage extends Component {
       </TouchableOpacity>
       <HelloText> Hello Ninjas </HelloText>
 
-      <Container style={{maxHeight: 300}}  hide={ninjas.length === 0}>
+      <Container style={{maxHeight: 270}} hide={ninjas.length === 0}>
         <NinjaList
           data={ninjas}
           renderItem={this._renderNinja.bind(this)}
         />
+        <TouchableOpacity onPress={this._saveNinjas.bind(this)}>
+          <HelloText> Save </HelloText>
+        </TouchableOpacity>
       </Container>
     </Center>;
   }
