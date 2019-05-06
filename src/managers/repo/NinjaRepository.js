@@ -3,7 +3,7 @@ import Ninja from "./models/ninja";
 import {Observable} from "rxjs";
 
 export default class NinjaRepository {
-  static _table: string = 'Ninjas';
+  static _table: string = Ninja.TABLE;
   static _client: DbClient = DbClient.getDefaultInstance();
 
   getNinja(id): Observable<Ninja> {

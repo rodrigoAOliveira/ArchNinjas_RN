@@ -1,5 +1,28 @@
+import {types} from "../orm/DbClient";
+
 export default class Ninja {
-  constructor(id: string, name: string, avatarUrl: string, job: string, outsorcing?: boolean = false) {
+  static TABLE = 'Ninjas';
+  static schema = [{
+    attr: 'id',
+    type: types.INT,
+    primaryKey: true,
+    autoIncrement: true
+  }, {
+    attr: 'name',
+    type: types.STRING,
+    notNull: true,
+  }, {
+    attr: 'avatarUrl',
+    type: types.STRING,
+  }, {
+    attr: 'job',
+    type: types.STRING,
+  }, {
+    attr: 'outsorcing',
+    type: types.INT,
+  }];
+
+  constructor(id: number, name: string, avatarUrl: string, job: string, outsorcing?: boolean = false) {
     this.id = id;
     this.name = name;
     this.avatarUrl = avatarUrl;
@@ -7,7 +30,7 @@ export default class Ninja {
     this.outsorcing = outsorcing;
   }
 
-  id: string;
+  id: number;
   name: string;
   avatarUrl: string;
   job: string;
