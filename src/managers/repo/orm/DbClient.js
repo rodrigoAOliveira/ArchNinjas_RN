@@ -2,9 +2,11 @@ import {Observable} from "rxjs";
 import SQLite from 'react-native-sqlite-storage'
 import {BuildConfig} from "../../../BuildConfig";
 import Ninja from '../models/ninja'
+import types from '../models/types'
 
 export default class DbClient {
   static _instance: DbClient;
+  static TABLES = [{name: Ninja.TABLE, schema: Ninja.schema}];
 
   constructor(dbConfig) {
     this._dbConfig = dbConfig;
@@ -12,7 +14,7 @@ export default class DbClient {
   }
 
   static boot() {
-    const tables = [{name: Ninja.TABLE, schema: Ninja.schema}];
+    const tables = DbClient.TABLES;
     const getSQLAttrsFromSchema = (schema) => {
       let result = '';
       for (let index = 0; index < schema.length; index++) {
@@ -29,7 +31,7 @@ export default class DbClient {
           result += ' NOT NULL';
         }
         if (index !== schema.length - 1) {
-          result += ',';
+          result += ', ';
         }
       }
       return result;
@@ -38,7 +40,7 @@ export default class DbClient {
     const dbClient = DbClient.getDefaultInstance();
     tables.forEach(table => {
       const values = getSQLAttrsFromSchema(table.schema);
-      const sql = `CREATE TABLE IF NOT EXISTS ${table.name}(${values})`;
+      const sql = `CREATE TABLE IF NOT EXISTS ${table.name} (${values})`;
       console.tron.log('Executing SQL...', sql);
       dbClient._client.executeSql(sql,
         [],
@@ -56,11 +58,31 @@ export default class DbClient {
   }
 
   static getSQLFromSchema(object: any) {
-    const {schema} = object.constructor;
+    const schema = object.constructor.schema;
     const attributes = schema.map(scheme => scheme.attr);
-    const values = attributes.map(attr => object[attr]);
+    const values = attributes.map(attr => {
+      const objectAttr = object[attr];
+      if (typeof objectAttr === 'boolean') {
+        return objectAttr ? 1 : 0;
+      } else return objectAttr;
+    });
+    const formatSql = () => {
+      let result = '';
+      for (let index = 0; index < attributes.length; index++) {
+        const value = values[index];
+        const attrSchema = schema[index];
+        if (attrSchema.type === types.STRING || attrSchema.type === types.BLOB) {
+          result += `'${value}'`;
+        } else result += value;
 
-    return `(${attributes.toString()}) VALUES (${values.toString()})`;
+        if (index !== attributes.length - 1) {
+          result += ', ';
+        }
+      }
+      return result;
+    };
+
+    return `(${attributes.toString()}) VALUES (${formatSql()})`;
   }
 
   static getDefaultInstance(): DbClient {

@@ -20,4 +20,9 @@ export default class NinjaManager {
         this._repo.getNinjas()
       ))
   }
+
+  saveNinja(ninja): Observable<void> {
+    return this._repo
+      .saveNinja(ninja)
+  }
 }
