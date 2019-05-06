@@ -7,11 +7,11 @@ export default class NinjaRepository {
   static _client: DbClient = DbClient.getDefaultInstance();
 
   getNinja(id): Observable<Ninja> {
-    return NinjaRepository._client.get(NinjaRepository._table, id);
+    return NinjaRepository._client.getFrom(NinjaRepository._table, [`id = ${id}`]);
   }
 
   getNinjas(): Observable<Ninja[]> {
-    return NinjaRepository._client.get(NinjaRepository._table);
+    return NinjaRepository._client.getAll(NinjaRepository._table);
   }
 
   saveNinja(ninja): Observable<void> {

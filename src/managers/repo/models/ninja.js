@@ -6,7 +6,7 @@ export default class Ninja {
     attr: 'id',
     type: types.INT,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   }, {
     attr: 'name',
     type: types.STRING,

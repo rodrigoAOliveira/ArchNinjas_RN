@@ -59,18 +59,26 @@ export default class DbClient {
 
   static getSQLFromSchema(object: any) {
     const schema = object.constructor.schema;
-    const attributes = schema.map(scheme => scheme.attr);
-    const values = attributes.map(attr => {
-      const objectAttr = object[attr];
-      if (typeof objectAttr === 'boolean') {
-        return objectAttr ? 1 : 0;
-      } else return objectAttr;
-    });
-    const formatSql = () => {
+
+    const attributes = [];
+    const values = [];
+    for (let field of schema) {
+      const {attr} = field;
+      const value = object[attr];
+
+      if (value !== undefined || value !== null) {
+        attributes.push(attr);
+        if (typeof value !== 'boolean') {
+          values.push(value)
+        } else values.push(value ? 1 : 0);
+      }
+    }
+    const formatSqlValues = () => {
       let result = '';
       for (let index = 0; index < attributes.length; index++) {
         const value = values[index];
-        const attrSchema = schema[index];
+        const attr = attributes[index];
+        const attrSchema = schema.filter(schema => schema.attr === attr)[0];
         if (attrSchema.type === types.STRING || attrSchema.type === types.BLOB) {
           result += `'${value}'`;
         } else result += value;
@@ -81,8 +89,7 @@ export default class DbClient {
       }
       return result;
     };
-
-    return `(${attributes.toString()}) VALUES (${formatSql()})`;
+    return `(${attributes.toString()}) VALUES (${formatSqlValues()})`;
   }
 
   static getDefaultInstance(): DbClient {
@@ -99,7 +106,7 @@ export default class DbClient {
     return new Observable(observer => {
       this._client.transaction(
         transaction => {
-          const sql = `INSERT INTO ${table} ${DbClient.getSQLFromSchema(object)}`;
+          const sql = `INSERT OR REPLACE INTO ${table} ${DbClient.getSQLFromSchema(object)}`;
           console.tron.log('Executing SQL...', sql);
           transaction.executeSql(sql)
         },
@@ -109,11 +116,50 @@ export default class DbClient {
     })
   }
 
-  get(table: string, id: string): Observable {
-    return Observable.of('Todo')
+  getAll(table: string): Observable {
+    return new Observable(observer => {
+      let results = [];
+      this._client.transaction(transaction => {
+        const sql = `SELECT * FROM ${table}`;
+        console.tron.log('Executing SQL...', sql);
+        transaction.executeSql(sql, [],
+          (ignored, result) => {
+            for (let index = 0; index < result.rows.length; index++) {
+              let row = result.rows.item(index);
+              results.push(row)
+            }
+            observer.next(results)
+          },
+          (error) => observer.error(error));
+      })
+    });
   }
 
-  getAll(table: string): Observable {
-
+  getFrom(table: string, where: [string]): Observable {
+    return new Observable(observer => {
+      let results = [];
+      this._client.transaction(transaction => {
+        let sql = `SELECT * FROM ${table}`;
+        if (where.length > 0) {
+          sql += ' WHERE';
+        }
+        for (let index = 0; index < where.length; index++) {
+          sql += ` ${where[index]}`;
+          if (index !== where.length - 1) {
+            sql += ' AND'
+          }
+        }
+        console.tron.log('Executing SQL...', sql);
+        transaction.executeSql(sql, [],
+          (ignored, result) => {
+            for (let index = 0; index < result.rows.length; index++) {
+              let row = result.rows.item(index);
+              results.push(row)
+            }
+            observer.next(results)
+          },
+          (error) => observer.error(error));
+      })
+    });
   }
 }
