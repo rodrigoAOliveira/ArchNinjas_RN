@@ -3,10 +3,14 @@ import SQLite from 'react-native-sqlite-storage'
 import {BuildConfig} from "../../../BuildConfig";
 import Ninja from '../models/ninja'
 import types from '../models/types'
+import Katana from "../models/katana";
 
 export default class DbClient {
   static _instance: DbClient;
-  static TABLES = [{name: Ninja.TABLE, schema: Ninja.schema}];
+  static TABLES = [
+    {name: Ninja.TABLE, schema: Ninja.schema},
+    {name: Katana.TABLE, schema: Katana.schema}
+  ];
 
   constructor(dbConfig) {
     this._dbConfig = dbConfig;
@@ -16,9 +20,11 @@ export default class DbClient {
   static boot() {
     const tables = DbClient.TABLES;
     const getSQLAttrsFromSchema = (schema) => {
+      const foreignKeys = [];
       let result = '';
       for (let index = 0; index < schema.length; index++) {
         const field = schema[index];
+
         result += `${field.attr} ${field.type}`;
 
         if (field.primaryKey) {
@@ -30,8 +36,22 @@ export default class DbClient {
         if (field.notNull) {
           result += ' NOT NULL';
         }
+        if (field.foreignKey) {
+          foreignKeys.push(field);
+        }
         if (index !== schema.length - 1) {
-          result += ', ';
+          result += ', '
+        }
+      }
+      if (foreignKeys.length > 0) {
+        result += ', ';
+        for (let index = 0; index < foreignKeys.length; index++) {
+          const field = foreignKeys[index];
+          const {table, attr} = field.foreignKey;
+          result += `FOREIGN KEY(${field.attr}) REFERENCES ${table}(${attr})`;
+          if (index !== foreignKeys.length - 1) {
+            result += ', '
+          }
         }
       }
       return result;
@@ -157,6 +177,19 @@ export default class DbClient {
               results.push(row)
             }
             observer.next(results)
+          },
+          (error) => observer.error(error));
+      })
+    });
+  }
+
+  execute(sql: string): Observable {
+    return new Observable(observer => {
+      this._client.transaction(transaction => {
+        console.tron.log('Executing SQL...', sql);
+        transaction.executeSql(sql, [],
+          (ignored, result) => {
+            observer.next(result)
           },
           (error) => observer.error(error));
       })
